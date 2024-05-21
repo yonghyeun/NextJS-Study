@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 const SizeClass = 'w-screen h-screen';
 const linearBackground = 'bg-gradient-to-b  from-purple-900 to-purple-500 ';

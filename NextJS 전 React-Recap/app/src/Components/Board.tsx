@@ -1,36 +1,9 @@
 import { useState } from 'react';
 import PostBox, { Post } from './PostBox';
 
-const Board = () => {
-  const [posts, setPosts] = useState<Post[]>([
-    {
-      id: Math.random(),
-      title: '하이',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, nostrum ad sequi molestiae nulla quam voluptatum dolorem eaque sint a! Atque laudantium debitis culpa eaque eos a, sint nemo tenetur!',
-    },
-    {
-      id: Math.random(),
-      title: '하이',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, nostrum ad sequi molestiae nulla quam voluptatum dolorem eaque sint a! Atque laudantium debitis culpa eaque eos a, sint nemo tenetur!',
-    },
-    {
-      id: Math.random(),
-      title: '하이',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, nostrum ad sequi molestiae nulla quam voluptatum dolorem eaque sint a! Atque laudantium debitis culpa eaque eos a, sint nemo tenetur!',
-    },
-    {
-      id: Math.random(),
-      title: '하이',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, nostrum ad sequi molestiae nulla quam voluptatum dolorem eaque sint a! Atque laudantium debitis culpa eaque eos a, sint nemo tenetur!',
-    },
-  ]);
-
+const Board = ({ posts }: { posts: Post[] }) => {
   return (
-    <section className='flex flex-wrap gap-5'>
+    <section className='grid grid-cols-3 gap-4'>
       {posts.map((post) => (
         <PostBox key={post.id} post={post} />
       ))}
