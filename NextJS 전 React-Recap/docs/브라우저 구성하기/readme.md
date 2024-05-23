@@ -159,3 +159,4 @@ export default Board;
 1. `isModalOpen` 상태는 `Header` 부분에 담긴 이벤트 핸들러에 의해 상태가 변경됩니다.
 2. `Modal` 내부에서 적힌 글 내용은 `Board` 에 존재하는 `posts` 배열에 추가되어야 합니다.
 3. `Modal` 은 전역적으로 렌더링 되어야 합니다.
+
