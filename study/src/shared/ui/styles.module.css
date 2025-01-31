@@ -1,0 +1,23 @@
+.scenario {
+  padding: 1rem;
+  borer-bottom: 1px solid #ccc;
+}
+
+.scenario > h1 {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.scenario ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
+
+.scenario ul h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.scenario ul li {
+  margin-bottom: 0.5rem;
+}
