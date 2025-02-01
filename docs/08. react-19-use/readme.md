@@ -62,6 +62,8 @@ export const WithoutUsePageFlipper: React.FC<PageFlipperProps> = ({
 
 - 서버 액션을 시행하는 랩퍼 컴포넌트 생성 하기
 
+![alt text](with.gif)
+
 ```tsx
 export const React19UsePage: React.FC = async () => {
   return (
@@ -138,6 +140,8 @@ const TodoWrapper = async () => {
 이론들을 보기 전 사용 예시를 먼저 보자
 
 ## use 훅 사용법
+
+![alt text](withuse.gif)
 
 ```tsx
 "use client";

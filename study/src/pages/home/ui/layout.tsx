@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/styles/globals.css";
 import { MainNavigationBar } from "./item/MainNavigationBar";
 import { mainNavigationData } from "../config";
+import { ReactQueryProvider } from "@/app/ReactQueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,12 +30,14 @@ export const RootLayout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900`}
       >
-        <section className="h-screen w-3/4 mx-auto ">
-          <header className="py-4">
-            <MainNavigationBar navigationData={mainNavigationData} />
-          </header>
-          {children}
-        </section>
+        <ReactQueryProvider>
+          <section className="h-screen w-3/4 mx-auto ">
+            <header className="py-4">
+              <MainNavigationBar navigationData={mainNavigationData} />
+            </header>
+            {children}
+          </section>
+        </ReactQueryProvider>
       </body>
     </html>
   );
