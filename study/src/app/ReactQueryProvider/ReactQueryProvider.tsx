@@ -22,9 +22,7 @@ export const ReactQueryProvider: React.FC<PropsWithChildren> = ({
           },
           dehydrate: {
             shouldDehydrateQuery: (query) =>
-              //  If you would like to extend the function while retaining the default behavior,
-              // import and execute defaultShouldDehydrateQuery as part of the return statement
-              defaultShouldDehydrateQuery(query) &&
+              defaultShouldDehydrateQuery(query) ||
               query.state.status === "pending",
           },
         },

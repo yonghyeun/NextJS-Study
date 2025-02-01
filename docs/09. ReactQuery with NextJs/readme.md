@@ -1,3 +1,10 @@
+# 시나리오
+
+- 해당 페이지는 json.placeholder 사이트에서 제공하는 todos 데이터 목록을 가져오는 페이지다.
+- 클라이언트 컴포넌트는 id 값 증가, 감소 버튼을 통해 `todos?id={id}` 값에 해당하는 데이터를 불러온다.
+- 이 때 이전에 가져온 id 의 값은 캐싱되어 불필요한 데이터 재요청을 방지한다.
+- 프리페칭이 일어나는 동안엔 Suspense 를 통해 로딩 상태를 보여줘야 한다.
+
 # 내부 구현 탐구 전 사용 예시 살펴보기
 
 우선 코드 내부를 살펴 보기전 실제 사용 예시를 살펴보자
@@ -299,6 +306,9 @@ const ServerTodoComponent: React.FC<PropsWithChildren> = ({ children }) => {
   const DEFAULT_TODO_ID = 1;
   const queryClient = new QueryClient({
     defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5,
+      },
       dehydrate: {
         shouldDehydrateQuery: (query) =>
           query.state.status === "pending" ||
