@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { type Todo } from "../api/getTodoById";
+import { getTodoById, type Todo } from "../api/getTodoById";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 const CurrentTodo: React.FC<Todo> = ({ title, id, body }) => (
   <section className="p-4 border border-white h-48 overflow-auto">
@@ -13,22 +14,22 @@ const CurrentTodo: React.FC<Todo> = ({ title, id, body }) => (
   </section>
 );
 
-interface TodoFlipperProps {
-  todo: Todo;
-}
-
-export const TodoFlipper: React.FC<TodoFlipperProps> = ({ todo }) => {
+export const ClientTodoFlipper: React.FC = () => {
   const [searchingTodoId, setSearchingTodoId] = useState(1);
+  const { data } = useSuspenseQuery({
+    queryKey: ["todo", searchingTodoId],
+    queryFn: () => getTodoById(searchingTodoId),
+  });
 
   const handlePrev = () => {
-    setSearchingTodoId((prev) => (prev - 1 > 0 ? prev : prev - 1));
+    setSearchingTodoId((prev) => (prev - 1 > 0 ? prev - 1 : prev));
   };
 
   const handleNext = () => setSearchingTodoId((prev) => prev + 1);
 
   return (
     <section>
-      <CurrentTodo {...todo} />
+      <CurrentTodo {...data} />
       <div className="flex gap-2">
         <TodoFlipperButton onClick={handlePrev}> prev </TodoFlipperButton>
         <TodoFlipperButton onClick={handleNext}> next </TodoFlipperButton>
