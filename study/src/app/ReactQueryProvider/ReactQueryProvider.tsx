@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  QueryClient,
-  defaultShouldDehydrateQuery,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { PropsWithChildren, useState } from "react";
 
@@ -19,11 +15,6 @@ export const ReactQueryProvider: React.FC<PropsWithChildren> = ({
         defaultOptions: {
           queries: {
             staleTime: DEFAULT_STALE_TIME,
-          },
-          dehydrate: {
-            shouldDehydrateQuery: (query) =>
-              defaultShouldDehydrateQuery(query) ||
-              query.state.status === "pending",
           },
         },
       })

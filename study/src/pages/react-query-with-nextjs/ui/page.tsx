@@ -11,11 +11,11 @@ import {
 export const Page = () => {
   return (
     <section>
-      <Suspense fallback={<div>loading...</div>}>
-        <ServerTodoComponent>
+      <ServerTodoComponent>
+        <Suspense fallback={<div>loading...</div>}>
           <ClientTodoFlipper />
-        </ServerTodoComponent>
-      </Suspense>
+        </Suspense>
+      </ServerTodoComponent>
       <ReactQueryWithNextJsScenario />
     </section>
   );
