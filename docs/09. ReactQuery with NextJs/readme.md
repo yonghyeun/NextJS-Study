@@ -335,3 +335,49 @@ const ServerTodoComponent: React.FC<PropsWithChildren> = ({ children }) => {
 이렇게 하게 되면 더 이상 `prefetch` 의 실행 유무와 상관 없이 더 이상 `await` 하지 않고 클라이언트 컴포넌트가 렌더링 되게 된다.
 
 짝짝짝
+
+# 내용 업데이트, 서버 컴포넌트는 완벽한 마크업을 생성하자
+
+> 2025.02.03 업데이트
+
+위에서 빠르게 마크업 결과를 전송하기 위해 서버단에서 api 데이터를 기다리지 않고
+
+바로 렌더링을 완료하도록 하는것이 발전된 방향이라고 이야기했다.
+
+하지만 이는 사실이 아니다. 만약 이렇게 하게 된다면 서버 컴포넌트를 사용하여 얻는 이점인
+
+**완성된 HTML 파일을 통한 SEO 최적화** 라는 장점을 이용하지 못하게 된다.
+
+실제 위 코드 예시를 봐보자
+
+![alt text](image.png)
+
+서버단에서 마크업을 생성 할 때 데이터를 기다리지 않고 생성하게 되니 이게 뭐람
+
+데이터 없이 `loading` 이란 상태만 나타나는 모습을 볼 수 있다.
+
+```tsx
+const ServerTodoComponent: React.FC<PropsWithChildren> = async ({
+  children,
+}) => {
+  const DEFAULT_TODO_ID = 1;
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["todo", DEFAULT_TODO_ID],
+    queryFn: () => getTodoById(DEFAULT_TODO_ID),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      {children}
+    </HydrationBoundary>
+  );
+};
+```
+
+완성된 마크업을 생성 할 수 있도록 서버에서 데이터를 가져오는 것을 `await` 해주도록 하자
+
+> 흠 .. 선택하기 나름인걸까? SEO 와 더 빠른 속도 ?
+>
+> 그런데 아무리 생각해도 SEO 를 포기하는 것은 올바르지 않은 것 같아서 나는 위처럼 사용 할 예정이다.
